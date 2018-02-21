@@ -1,0 +1,354 @@
+Search "ExtRepOfObj" (313 hits in 40 files)
+  C:\gap4r8\lib\algfld.gi (13 hits)
+	Line 253: #M  ExtRepOfObj     
+	Line 258: InstallMethod(ExtRepOfObj,"baseFieldElm",true,
+	Line 270: InstallMethod(ExtRepOfObj,"ExtElm",true,
+	Line 774:   return AlgExtElm(FamilyObj(a),List(ExtRepOfObj(a),i->i mod m));
+	Line 810:     Add(m,ShallowCopy(ExtRepOfObj(c)));
+	Line 981:     return ExtRepOfObj( v );
+	Line 1256:       cf:=ExtRepOfObj(i);
+	Line 1310: 	c:=QuotRemPolList(ExtRepOfObj(kl[i]),red)[2];
+	Line 1324: 	kl[i]:=AlgExtElm(alfam,ExtRepOfObj(kl[i]));
+	Line 1373:   d:=Lcm(Concatenation(Flat(List(cf,i->List(ExtRepOfObj(i),DenominatorRat))),
+	Line 1428: 	  kp[i]!.myCoeffun:=ExtRepOfObj;
+	Line 1850: 		w:=ShallowCopy(ExtRepOfObj(j));
+	Line 1906: 			 ExtRepOfObj(z),inum);
+  C:\gap4r8\lib\algfp.gi (10 hits)
+	Line 38:     return NiceNormalFormByExtRepFunction( Fam )( Fam, ExtRepOfObj( elm ) );
+	Line 44: #M  ExtRepOfObj( <elm> )  . . . . . . . . . . . . .  for f.p. algebra element
+	Line 51: InstallMethod( ExtRepOfObj,
+	Line 55:     elm -> ExtRepOfObj( elm![1] ) );
+	Line 86:     expr:= ExtRepOfObj( expr )[2];
+	Line 92:     gens1:= List( gens1, x -> ExtRepOfObj( x )[2] );
+	Line 173:     return ExtRepOfObj( x ) = ExtRepOfObj( y );
+	Line 173:     return ExtRepOfObj( x ) = ExtRepOfObj( y );
+	Line 216:     x:= ExtRepOfObj( x )[2];
+	Line 217:     y:= ExtRepOfObj( y )[2];
+  C:\gap4r8\lib\alglie.gi (16 hits)
+	Line 1149:     return PTHPOWERIMAGE_PPI_VEC(fam!.fullSCAlgebra,fam!.zerocoeff,Characteristic(fam),fam!.basisVectors,fam!.pMapping,ExtRepOfObj(x),x);
+	Line 1159:         x := PTHPOWERIMAGE_PPI_VEC(fam!.fullSCAlgebra,fam!.zerocoeff,Characteristic(fam),fam!.basisVectors,fam!.pMapping,ExtRepOfObj(x),x);
+	Line 3582:         list:= ExtRepOfObj( gen )[2];
+	Line 3607:       v:= ExtRepOfObj( v )[2];
+	Line 3849:            Add( todo, [ false, descr[2][i+1], ExtRepOfObj( descr[2][i] ) ] );
+	Line 4007:        e:= ExtRepOfObj(x)[2];
+	Line 4691:      pp:= Dcopy( ExtRepOfObj( r )[2] );
+	Line 5484:         er:= ExtRepOfObj( r )[2];
+	Line 5636:         Add( enum_gens, List( tempgens, x -> ExtRepOfObj( x )[1] ) );
+	Line 5670:                 e:= ExtRepOfObj(c);
+	Line 5724:             e:= ExtRepOfObj( pimgs[i] );
+	Line 5749:              e:= ExtRepOfObj(h);
+	Line 5835:         Add( enum_gens, List( tempgens, x -> ExtRepOfObj( x )[1] ) );
+	Line 5869:                 e:= ExtRepOfObj(c);
+	Line 5925:             e:= ExtRepOfObj( pimgs[i] );
+	Line 5949:              e:= ExtRepOfObj(h);
+  C:\gap4r8\lib\algrep.gd (4 hits)
+	Line 29: ##  algebra module is handled by <C>ExtRepOfObj</C> and <C>ObjByExtRep</C>.
+	Line 30: ##  For an element <C>v</C> of the algebra module, <C>ExtRepOfObj( v )</C> returns
+	Line 118: ##  gap> ExtRepOfObj( vv[1] ) = [ 1, 0, 0 ];
+	Line 447: ##  space spanned by all <C>ExtRepOfObj( v )</C> for <C>v</C> in
+  C:\gap4r8\lib\algrep.gi (43 hits)
+	Line 81: #M  ExtRepOfObj( <elm> )  . . . . . . . . . . . .  for algebra module elements
+	Line 83: InstallMethod( ExtRepOfObj,
+	Line 130:                          ExtRepOfObj( Zero(V) ) );
+	Line 133:         vecs:= List( vectors, ExtRepOfObj );
+	Line 152:             List( GeneratorsOfLeftModule( V ), ExtRepOfObj ) ) );
+	Line 503:                                         List( vectors, ExtRepOfObj ) )
+	Line 523:                                         List( vectors, ExtRepOfObj ),
+	Line 524:                                         ExtRepOfObj( zero ) )
+	Line 571:        CloseMutableBasis( MB!.underlyingMutableBasis, ExtRepOfObj( v ) );
+	Line 583:                    ExtRepOfObj( v ) );
+	Line 762:               vecs:= List( gens, ExtRepOfObj );
+	Line 774:                               ExtRepOfObj( Zero(V) ), "infinity" );
+	Line 814:                   List( gens, ExtRepOfObj ),
+	Line 816:                   ExtRepOfObj( Zero(V) ), "infinity" );
+	Line 837:     g:= List( GeneratorsOfLeftModule( V ), ExtRepOfObj );
+	Line 882:       W:= VectorSpace( LeftActingDomain(V), List( vectors, ExtRepOfObj ) );
+	Line 1329: #M  ExtRepOfObj( <t> )  . . . . . . .  for a monomial element in monomial rep.
+	Line 1340: InstallMethod( ExtRepOfObj,
+	Line 1658:                      x -> ExtRepOfObj(x)[1],
+	Line 1659:                      x -> ExtRepOfObj(x)[2] );
+	Line 1686:                      x -> ExtRepOfObj(x)[1],
+	Line 1687:                      x -> ExtRepOfObj(x)[2] );
+	Line 1712:                    x -> ExtRepOfObj(x)[1],
+	Line 1713:                    x -> ExtRepOfObj(x)[2] );
+	Line 1815:     eu:= ExtRepOfObj( u );
+	Line 1974:     BT!.heads:= List( gens, x -> ExtRepOfObj(x)[1] );
+	Line 2191:     eu:= ExtRepOfObj( u );
+	Line 2364:     BT!.heads:= List( gens, x -> ExtRepOfObj(x)[1] );
+	Line 2525:     eu:= ExtRepOfObj( u );
+	Line 2683:     BT!.heads:= List( gens, x -> ExtRepOfObj(x)[1] );
+	Line 2795: #M  ExtRepOfObj( <v> ) . . . . . . . . for a sparse rowspace element.
+	Line 2811: InstallMethod( ExtRepOfObj,
+	Line 2832:     ev:= ExtRepOfObj( v );
+	Line 3243: #M  ExtRepOfObj( <t> )  . . . . . . .  for a direct sum element in packed rep.
+	Line 3254: InstallMethod( ExtRepOfObj,
+	Line 3276:     return ObjByExtRep( FamilyObj( u ), ExtRepOfObj( u )+ ExtRepOfObj( v ) );
+	Line 3276:     return ObjByExtRep( FamilyObj( u ), ExtRepOfObj( u )+ ExtRepOfObj( v ) );
+	Line 3284:     return ObjByExtRep( FamilyObj( u ), -ExtRepOfObj( u ) );
+	Line 3293:     return ObjByExtRep( FamilyObj( u ), scal*ExtRepOfObj( u ) );
+	Line 3301:     return ObjByExtRep( FamilyObj( u ), scal*ExtRepOfObj( u ) );
+	Line 3343:       ev:= ExtRepOfObj( v );
+	Line 3403:                        List( ShallowCopy( ExtRepOfObj( tn ) ), u -> x^u ) );
+	Line 3409:                        List( ShallowCopy( ExtRepOfObj( tn ) ), u -> u^x ) );
+  C:\gap4r8\lib\algsc.gd (1 hit)
+	Line 132: ##  $`ExtRepOfObj'( v )$.
+  C:\gap4r8\lib\algsc.gi (36 hits)
+	Line 38: #T         return Sum( List( ExtRepOfObj( quat ), c -> c^2 ) );
+	Line 129: #M  ExtRepOfObj( <elm> )  . . . . . . . . . . . .  for s.~c. algebra elements
+	Line 131: InstallMethod( ExtRepOfObj,
+	Line 156:     elm   := ExtRepOfObj( elm );
+	Line 216:     elm   := ExtRepOfObj( elm );
+	Line 297:     function( x, y ) return ExtRepOfObj( x ) = ExtRepOfObj( y ); end );
+	Line 297:     function( x, y ) return ExtRepOfObj( x ) = ExtRepOfObj( y ); end );
+	Line 310:     function( x, y ) return ExtRepOfObj( x ) < ExtRepOfObj( y ); end );
+	Line 310:     function( x, y ) return ExtRepOfObj( x ) < ExtRepOfObj( y ); end );
+	Line 324:     return ObjByExtRep( FamilyObj(x), ExtRepOfObj(x) + ExtRepOfObj(y) );
+	Line 324:     return ObjByExtRep( FamilyObj(x), ExtRepOfObj(x) + ExtRepOfObj(y) );
+	Line 341:     return ObjByExtRep( FamilyObj(x), ExtRepOfObj(x) - ExtRepOfObj(y) );
+	Line 341:     return ObjByExtRep( FamilyObj(x), ExtRepOfObj(x) - ExtRepOfObj(y) );
+	Line 361:                         ExtRepOfObj( x ), ExtRepOfObj( y ) ) );
+	Line 361:                         ExtRepOfObj( x ), ExtRepOfObj( y ) ) );
+	Line 380:     return ObjByExtRep( FamilyObj( y ), x * ExtRepOfObj( y ) );
+	Line 396:     return ObjByExtRep( FamilyObj( x ), ExtRepOfObj( x ) * y );
+	Line 411:     return ObjByExtRep( FamilyObj( y ), x * ExtRepOfObj( y ) );
+	Line 425:     return ObjByExtRep( FamilyObj( x ), ExtRepOfObj( x ) * y );
+	Line 440:     return ObjByExtRep( FamilyObj( x ), ExtRepOfObj( x ) / y );
+	Line 454:     x -> ObjByExtRep( FamilyObj( x ), Zero( ExtRepOfObj( x ) ) ) );
+	Line 460:                       AdditiveInverse( ExtRepOfObj( x ) ) ) );
+	Line 483:       one:= QuotientFromSCTable( F!.sctable, ExtRepOfObj( one ),
+	Line 484:                                              ExtRepOfObj( x ) );
+	Line 502:     return IsSubset( LeftActingDomain( A ), ExtRepOfObj( a ) );
+	Line 784:                          [ 1, 0, 0, 0 ] * One( ExtRepOfObj( quat )[1] ) ) );
+	Line 802:     data:= ExtRepOfObj( quat );
+	Line 826:     v:= ExtRepOfObj( quat );
+	Line 841:     v:= ExtRepOfObj( quat );
+	Line 857:     v:= ExtRepOfObj( quat );
+	Line 892:           coeff:= ExtRepOfObj( M[j][k] );
+	Line 905:         coeff:= ExtRepOfObj( v[j] );
+	Line 958:       return ExtRepOfObj( v );
+	Line 998:     return ExtRepOfObj( v );
+	Line 1108:       gensV:= List( gensV, ExtRepOfObj );
+	Line 1109:       gensW:= List( gensW, ExtRepOfObj );
+  C:\gap4r8\lib\cyclotom.gi (10 hits)
+	Line 47:     cfs:= ExtRepOfObj( x );
+	Line 69:     x -> CycList( List( ExtRepOfObj( x ), RoundCycDown ) ) );
+	Line 152: #M  ExtRepOfObj( <cyc> )
+	Line 154: ##  <#GAPDoc Label="ExtRepOfObj:cyclotomics">
+	Line 156: ##  <Meth Name="ExtRepOfObj" Arg='cyc' Label="for a cyclotomic"/>
+	Line 165: ##  gap> ExtRepOfObj( E(5) ); CoeffsCyc( E(5), 5 );
+	Line 175: InstallMethod( ExtRepOfObj,
+	Line 207:       coeffs:= ExtRepOfObj( z ); # returns `CoeffsCyc( z, Conductor( z ) )'
+	Line 438:     coeffs:= ExtRepOfObj( root );
+	Line 1247:     coeffs:= ExtRepOfObj( cyc );
+  C:\gap4r8\lib\float.gi (1 hit)
+	Line 391: InstallMethod( ExtRepOfObj, "for floats", [ IsFloat ], -1,
+  C:\gap4r8\lib\fpmon.gi (3 hits)
+	Line 346:       v := ExtRepOfObj(w);
+	Line 432:     wlist := ShallowCopy(ExtRepOfObj(w));
+	Line 455: 		wlist := ExtRepOfObj(w); 
+  C:\gap4r8\lib\fpsemi.gi (1 hit)
+	Line 352:       v := ExtRepOfObj(w);
+  C:\gap4r8\lib\grpfp.gi (7 hits)
+	Line 82: #M  ExtRepOfObj( <elm> )  . . . . . . . . . . . . . for element of f.p. group
+	Line 84: InstallMethod( ExtRepOfObj,
+	Line 89:     obj -> ExtRepOfObj( obj![1] ) );
+	Line 475:   ex:=ExtRepOfObj(elm);
+	Line 1131:       #T this code should use ExtRepOfObj -- its faster
+	Line 3414: #            list := ShallowCopy(ExtRepOfObj( rel ));
+	Line 3475: #        list := ShallowCopy(ExtRepOfObj( rel ));
+  C:\gap4r8\lib\grpfree.gi (1 hit)
+	Line 191:     elm:= ExtRepOfObj( elm );
+  C:\gap4r8\lib\lierep.gd (8 hits)
+	Line 66: ##  <C>ExtRepOfObj( <A>c</A> )</C>.
+	Line 110: ##  gap> ExtRepOfObj( c1 );
+	Line 114: ##  gap> ExtRepOfObj( c2 );
+	Line 143: ##  gap> ExtRepOfObj( last[1] );
+	Line 765: ##  If <C>v</C> is a <C>WeightRepElement</C>, then <C>ExtRepOfObj( v )</C> 
+	Line 817: ##  <C>v</C> is an element of such a module, then <C>ExtRepOfObj( v )</C> 
+	Line 835: ##  gap> e:= ExtRepOfObj( vv[100] );
+	Line 837: ##  gap> ExtRepOfObj( e );
+  C:\gap4r8\lib\lierep.gi (10 hits)
+	Line 83: #M  ExtRepOfObj( <coch> ) . . . . . . . . . . . . . . . for a cochain
+	Line 85: InstallMethod( ExtRepOfObj,
+	Line 1354: #M  ExtRepOfObj( <obj> )
+	Line 1365: InstallMethod( ExtRepOfObj,
+	Line 2710: #M  ExtRepOfObj( <wte> ) . . . . . . . . . . for a weight rep element
+	Line 2721: InstallMethod( ExtRepOfObj,
+	Line 3555:                     sortmn[j]:= List( mmm[j], x -> ExtRepOfObj(x)[1] );
+	Line 3827:     r:= ExtRepOfObj( p )[2];
+	Line 3860:    mons:= [ ExtRepOfObj( w )[2][1] ];
+	Line 3886:        r:= ExtRepOfObj( c1 )[2];
+  C:\gap4r8\lib\mgmfree.gi (1 hit)
+	Line 168:     info:= WordInfo( n, ExtRepOfObj( elm ) );
+  C:\gap4r8\lib\mgmring.gi (3 hits)
+	Line 1353: #M  ExtRepOfObj( <elm> )  . . . . . . . . . . . . . .  for magma ring element
+	Line 1360: InstallMethod( ExtRepOfObj,
+	Line 1371:       elm[i]:= ExtRepOfObj( elm[i] );
+  C:\gap4r8\lib\object.gd (3 hits)
+	Line 624: #O  ExtRepOfObj( <obj> )  . . . . . . .  external representation of an object
+	Line 627: ##  <Oper Name="ExtRepOfObj" Arg='obj'/>
+	Line 634: DeclareOperation( "ExtRepOfObj", [ IsObject ] );
+  C:\gap4r8\lib\onecohom.gi (1 hit)
+	Line 657:     w:=ExtRepOfObj(i);
+  C:\gap4r8\lib\orders.gi (2 hits)
+	Line 931:     eu:=ExtRepOfObj(u);
+	Line 932:     ev:=ExtRepOfObj(v);
+  C:\gap4r8\lib\pcgspcg.gi (6 hits)
+	Line 284:     rep := ExtRepOfObj( UnderlyingElement(elm) );
+	Line 309:     rep := ExtRepOfObj( UnderlyingElement(elm) );
+	Line 332:     rep := ExtRepOfObj( UnderlyingElement(elm) );
+	Line 447:   c:=ExtRepOfObj(c);
+	Line 545: #    rep := 8Bits_ExtRepOfObj( elm );
+	Line 564: #    rep := 8Bits_ExtRepOfObj(elm);
+  C:\gap4r8\lib\polyrat.gi (1 hit)
+	Line 976:           Add(a,Sum(ExtRepOfObj(i),AbsInt)*nalpha);
+  C:\gap4r8\lib\pquot.gi (3 hits)
+	Line 607:     w := ExtRepOfObj( w );
+	Line 686:           AssocWord( type, Concatenation( ExtRepOfObj( inverses[g] ), t ) );
+	Line 1796:     l := List(qs!.images,x->ObjByExtRep(FamilyObj(One(H)),ExtRepOfObj(x)));
+  C:\gap4r8\lib\ratfun.gd (1 hit)
+	Line 1759: ##    `ExtRepOfObj'
+  C:\gap4r8\lib\ringsc.gi (13 hits)
+	Line 48: #M  ExtRepOfObj( <elm> )  . . . . . . . . . . . .  for s.~c. ring elements
+	Line 50: InstallMethod( ExtRepOfObj,
+	Line 74:     elm   := ExtRepOfObj( elm );
+	Line 132:     elm   := ExtRepOfObj( elm );
+	Line 431:       n:=ExtRepOfObj(gens[1]^2)[1];
+	Line 673:     m:=SCRHNFExtend(fam!.moduli,l,piv,ExtRepOfObj(i),false,false);
+	Line 682: 	p:=ExtRepOfObj(ObjByExtRep(fam,l[i])*ObjByExtRep(fam,l[j]));
+	Line 700:     m:=SCRHNFExtend(fam!.moduli,l,piv,ExtRepOfObj(gens[i]),li,imgs[i]);
+	Line 709: 	p:=ExtRepOfObj(ObjByExtRep(fam,l[i])*ObjByExtRep(fam,l[j]));
+	Line 726:   e:=ExtRepOfObj(e);
+	Line 811:   return SCRingElmSift(fam!.moduli,s[1],s[2],ExtRepOfObj(e),true);
+	Line 917:       m:=SCRHNFExtend(fam!.moduli,l,piv,ExtRepOfObj(i),false,false);
+	Line 925: 	e:=ExtRepOfObj(g[x]*g[y]);
+  C:\gap4r8\lib\rwsdt.gi (17 hits)
+	Line 118:             gens[i] := AssocWord( dt[PC_DEFAULT_TYPE], ExtRepOfObj(gens[i]) );
+	Line 453:     dtrws![PC_POWERS][i]  := ExtRepOfObj(rhs);
+	Line 468: 	dtrws![PC_CONJUGATES][i][j] := ExtRepOfObj(rhs);
+	Line 471: 	dtrws![PC_CONJUGATES][i][j] := ExtRepOfObj(rhs);
+	Line 610:                               DTMultiply( ExtRepOfObj(lword), 
+	Line 611:                                           ExtRepOfObj(rword),
+	Line 632:                               DTCommutator( ExtRepOfObj(lword), 
+	Line 633:                                             ExtRepOfObj(rword),
+	Line 654:                               DTSolution( ExtRepOfObj(lword), 
+	Line 655:                                           ExtRepOfObj(rword),
+	Line 676:                               DTPower( ExtRepOfObj(word), int, dtrws )  );
+	Line 696:                               DTQuotient( ExtRepOfObj(lword), 
+	Line 697:                                           ExtRepOfObj(rword),
+	Line 718:                               DTConjugate( ExtRepOfObj(lword), 
+	Line 719:                                            ExtRepOfObj(rword),
+	Line 739:                               DTSolution( ExtRepOfObj(word), [], dtrws )  );
+	Line 769:     ext := ExtRepOfObj(word);
+  C:\gap4r8\lib\rwsgrp.gi (3 hits)
+	Line 80: #M  ExtRepOfObj( <elm-by-rws> )
+	Line 82: InstallMethod( ExtRepOfObj,
+	Line 88:     return ExtRepOfObj( UnderlyingElement( obj ) );
+  C:\gap4r8\lib\rwspcgrp.gi (23 hits)
+	Line 188:     word  := ExtRepOfObj(obj);
+	Line 220:     word  := ExtRepOfObj(obj);
+	Line 445:     return 8Bits_AssocWord( fam!.8BitsType, ExtRepOfObj(elm) );
+	Line 454:     "using 8Bits_ExtRepOfObj",
+	Line 463:     return ObjByExtRep( fam, 8Bits_ExtRepOfObj(obj) );
+	Line 468: #M  ExtRepOfObj( <Is8BitsPcWordRep> )
+	Line 470: InstallMethod( ExtRepOfObj,
+	Line 471:     "using 8Bits_ExtRepOfObj",
+	Line 475:     8Bits_ExtRepOfObj );
+	Line 616:     return 16Bits_AssocWord( fam!.16BitsType, ExtRepOfObj(elm) );
+	Line 625:     "using 16Bits_ExtRepOfObj",
+	Line 634:     return ObjByExtRep( fam, 16Bits_ExtRepOfObj(obj) );
+	Line 639: #M  ExtRepOfObj( <Is16BitsPcWordRep> )
+	Line 641: InstallMethod( ExtRepOfObj,
+	Line 642:     "using 16Bits_ExtRepOfObj",
+	Line 646:     16Bits_ExtRepOfObj );
+	Line 787:     return 32Bits_AssocWord( fam!.32BitsType, ExtRepOfObj(elm) );
+	Line 796:     "using 16Bits_ExtRepOfObj",
+	Line 805:     return ObjByExtRep( fam, 32Bits_ExtRepOfObj(obj) );
+	Line 810: #M  ExtRepOfObj( <Is32BitsPcWordRep> )
+	Line 812: InstallMethod( ExtRepOfObj,
+	Line 813:     "using 32Bits_ExtRepOfObj",
+	Line 817:     32Bits_ExtRepOfObj );
+  C:\gap4r8\lib\rwspcsng.gi (1 hit)
+	Line 1010:                                   ExtRepOfObj(gens[i]) );
+  C:\gap4r8\lib\sgpres.gi (1 hit)
+	Line 351:       #T this code should use ExtRepOfObj -- its faster
+  C:\gap4r8\lib\smgrpfre.gi (1 hit)
+	Line 219:     elm:= ExtRepOfObj( elm );
+  C:\gap4r8\lib\straight.gi (3 hits)
+	Line 1974: #M  ExtRepOfObj
+	Line 1976: InstallMethod(ExtRepOfObj,"for a straight line program word",true,
+	Line 1979:   return ExtRepOfObj(EvalStraightLineProgElm(slp));
+  C:\gap4r8\lib\tcsemi.gi (4 hits)
+	Line 409: 	  n:=Length(ExtRepOfObj(u));
+	Line 412: 	    for k in [1..ExtRepOfObj(u)[2*i]] do
+	Line 413: 	      Add(l,ExtRepOfObj(u)[2*i-1]);
+	Line 568: 		extr := ExtRepOfObj(UnderlyingElement(x));
+  C:\gap4r8\lib\word.gd (3 hits)
+	Line 450: ##  gap> ExtRepOfObj( w );  ExtRepOfObj( gens[1] );
+	Line 450: ##  gap> ExtRepOfObj( w );  ExtRepOfObj( gens[1] );
+	Line 453: ##  gap>  ExtRepOfObj( w*w );
+  C:\gap4r8\lib\word.gi (13 hits)
+	Line 23:     return ExtRepOfObj( x ) = ExtRepOfObj( y );
+	Line 23:     return ExtRepOfObj( x ) = ExtRepOfObj( y );
+	Line 46:     x:= ExtRepOfObj( x );
+	Line 47:     y:= ExtRepOfObj( y );
+	Line 81:     xx:= ExtRepOfObj( x );
+	Line 85:     yy:= ExtRepOfObj( y );
+	Line 114:     return len( ExtRepOfObj( w ) );
+	Line 130:     gens1:= List( gens1, ExtRepOfObj );
+	Line 141:     return mapped( ExtRepOfObj( x ) );
+	Line 190:     print( ExtRepOfObj( elm ) );
+	Line 218:     elm:= string( ExtRepOfObj( elm ) );
+	Line 251: #M  ExtRepOfObj( <w> )  . . . . . . . . . . . . . . for a nonassociative word
+	Line 253: InstallMethod( ExtRepOfObj,
+  C:\gap4r8\lib\wordass.gd (3 hits)
+	Line 198: ##  given by <Ref Func="ExtRepOfObj"/>.
+	Line 892: ##  <C>ExtRepOfObj</C> and <C>ObjByExtRep</C> can be used and interface to
+	Line 898: ##  gap> ExtRepOfObj( w^2 );
+  C:\gap4r8\lib\wordass.gi (18 hits)
+	Line 139:   x:= ExtRepOfObj( x );
+	Line 140:   y:= ExtRepOfObj( y );
+	Line 208:     xx:= ExtRepOfObj( x );
+	Line 213:     yy:= ExtRepOfObj( y );
+	Line 321:       xx:= ExtRepOfObj( x );
+	Line 398:     xx:= ExtRepOfObj( x );
+	Line 507:     xx:= ExtRepOfObj( x );
+	Line 547:   extrep:= ExtRepOfObj( word );
+	Line 571: #   gens := List( gens, ExtRepOfObj );
+	Line 586: #   w := ExtRepOfObj(w);
+	Line 644:     extw:= ExtRepOfObj( w );
+	Line 701:   e:=ExtRepOfObj(w);
+	Line 891:   e:=ExtRepOfObj(word);
+	Line 896:       app:=ExtRepOfObj(by^e[i+1]);
+	Line 933:   w := ShallowCopy(ExtRepOfObj( w ));
+	Line 963:     x:= ExtRepOfObj( x );
+	Line 974:       ex2:= List( gens2, ExtRepOfObj );
+	Line 982:     gens1:= List( gens1, ExtRepOfObj );
+  C:\gap4r8\lib\wordlett.gi (2 hits)
+	Line 120: #M  ExtRepOfObj(<wor> )
+	Line 165: InstallMethod(ExtRepOfObj,"assoc word in letter rep",true,
+  C:\gap4r8\lib\wordrep.gi (21 hits)
+	Line 328:   w->SyllableWordObjByExtRep(FamilyObj(w),ExtRepOfObj(w)));
+	Line 410: InstallMethod( ExtRepOfObj,
+	Line 414:     8Bits_ExtRepOfObj );
+	Line 503: InstallMethod( ExtRepOfObj,
+	Line 507:     16Bits_ExtRepOfObj );
+	Line 596: InstallMethod( ExtRepOfObj,
+	Line 600:     32Bits_ExtRepOfObj );
+	Line 689: InfBits_ExtRepOfObj := elm->elm![1];
+	Line 690: InstallMethod( ExtRepOfObj,
+	Line 694:     InfBits_ExtRepOfObj );
+	Line 1227:       ext:= ExtRepOfObj( obj );
+	Line 1300:   e:=ExtRepOfObj(word);
+	Line 1320:   e:=ExtRepOfObj(word);
+	Line 1427:   w:= ExtRepOfObj( w );
+	Line 1444:   return ExtRepOfObj( w )[ 2*n ];
+	Line 1456:   return ExtRepOfObj( w )[ 2*n-1 ];
+	Line 1466:     w -> Length( ExtRepOfObj( w ) ) / 2 );
+	Line 1477:   w:= ExtRepOfObj( w );
+	Line 1478:   gen:= ExtRepOfObj( gen );
+	Line 1507:   gens:=List(FreeGeneratorsOfFpGroup(f),x->ExtRepOfObj(x));
+	Line 1510:   w:= ExtRepOfObj( w );
+  C:\gap4r8\lib\zmodnz.gi (2 hits)
+	Line 110: #M  ExtRepOfObj( <obj> )
+	Line 112: InstallMethod( ExtRepOfObj,

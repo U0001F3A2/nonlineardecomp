@@ -1,0 +1,87 @@
+Search "letterrepassocword" (71 hits in 15 files)
+  C:\gap4r8\lib\ghomfp.gi (3 hits)
+	Line 90:     l:=LetterRepAssocWord(rel);
+	Line 291:     word:=LetterRepAssocWord(word);
+	Line 716: 	  ForAll(List(mapi[2],i->LetterRepAssocWord(UnderlyingElement(i))),
+  C:\gap4r8\lib\grpfp.gi (19 hits)
+	Line 676:     genind:=List(gens,i->AbsInt(LetterRepAssocWord(i)[1]));
+	Line 694: 	word:=LetterRepAssocWord(rel);
+	Line 833:   genind:=List(gens,i->AbsInt(LetterRepAssocWord(i)[1]));
+	Line 851:       word:=LetterRepAssocWord(rel);
+	Line 1713:   word:=LetterRepAssocWord(w);
+	Line 2951:     w:=LetterRepAssocWord(i);
+	Line 3314:       gens2[i] := AbsInt(LetterRepAssocWord(gens[i])[1]);
+	Line 3323:         relj := LetterRepAssocWord(rels[j]);
+	Line 3443:       word:=LetterRepAssocWord(rel);
+	Line 3480:       reps[i]:=AssocWordByLetterRep(fam,-LetterRepAssocWord(rel));
+	Line 3552:     gennums:= List(gens,i->AbsInt(LetterRepAssocWord(i)[1])); 
+	Line 3590: 	es:=LetterRepAssocWord(rel);
+	Line 3628: 	    rel:=LetterRepAssocWord(rel);
+	Line 4477:   for i in LetterRepAssocWord(w) do
+	Line 4490:   for i in LetterRepAssocWord(w) do
+	Line 4516:   wlist:=LetterRepAssocWord(w);
+	Line 4537:   wlist:=LetterRepAssocWord(w);
+	Line 4729:       #w:=LetterRepAssocWord(rel);
+	Line 4834:       w:=LetterRepAssocWord(rel);
+  C:\gap4r8\lib\kbsemi.gi (2 hits)
+	Line 115:      [LetterRepAssocWord(i[1]),LetterRepAssocWord(i[2])]),
+	Line 115:      [LetterRepAssocWord(i[1]),LetterRepAssocWord(i[2])]),
+  C:\gap4r8\lib\obsolete.gi (1 hit)
+	Line 660:   elm:=LetterRepAssocWord(elm);
+  C:\gap4r8\lib\orders.gd (1 hit)
+	Line 370: ##  (see&nbsp;<Ref Func="LetterRepAssocWord"/>).
+  C:\gap4r8\lib\rws.gd (2 hits)
+	Line 79: ##     [LetterRepAssocWord(i[1]),LetterRepAssocWord(i[2])]),
+	Line 79: ##     [LetterRepAssocWord(i[1]),LetterRepAssocWord(i[2])]),
+  C:\gap4r8\lib\rwssmg.gi (1 hit)
+	Line 274:        ReduceLetterRepWordsRewSys(rws!.tzrules,LetterRepAssocWord(w)));
+  C:\gap4r8\lib\schur.gi (1 hit)
+	Line 363:     i:=LetterRepAssocWord(r);
+  C:\gap4r8\lib\sgpres.gi (8 hits)
+	Line 2120:     ggensi := List(aug.groupGenerators,i->AbsInt(LetterRepAssocWord(i)[1]));
+	Line 2176: 	word:=LetterRepAssocWord(grel);
+	Line 2252: 	word:=LetterRepAssocWord(grel);
+	Line 2338:     ggensi := List(aug.groupGenerators,i->AbsInt(LetterRepAssocWord(i)[1]));
+	Line 2382: 	word:=LetterRepAssocWord(grel);
+	Line 2459: 	word:=LetterRepAssocWord(grel);
+	Line 2639:     aug.transtab:=List(aug.groupGenerators,i->AbsInt(LetterRepAssocWord(i)[1]));
+	Line 2662:   l:=LetterRepAssocWord(word);
+  C:\gap4r8\lib\straight.gi (3 hits)
+	Line 1984: #M  LetterRepAssocWord
+	Line 1986: InstallMethod(LetterRepAssocWord,"for a straight line program word",true,
+	Line 1989:   return LetterRepAssocWord(EvalStraightLineProgElm(slp));
+  C:\gap4r8\lib\tietze.gd (3 hits)
+	Line 113: ##  This function simply calls <Ref Oper="LetterRepAssocWord"/>.
+	Line 118: DeclareSynonym("TietzeWordAbstractWord",LetterRepAssocWord);
+	Line 134: DeclareSynonym("TzWordAbstractWord",LetterRepAssocWord);
+  C:\gap4r8\lib\wordass.gd (7 hits)
+	Line 216: ##  numbers (as given by <Ref Func="LetterRepAssocWord"/>).
+	Line 795: #O  LetterRepAssocWord( <w>[, <gens>] )
+	Line 797: ##  <#GAPDoc Label="LetterRepAssocWord">
+	Line 799: ##  <Oper Name="LetterRepAssocWord" Arg='w[, gens]'/>
+	Line 819: DeclareOperation( "LetterRepAssocWord", [ IsAssocWord ] );
+	Line 832: ##  (see <Ref Func="LetterRepAssocWord"/>) and returns an associative word in
+	Line 840: ##  gap> LetterRepAssocWord( w^2 );
+  C:\gap4r8\lib\wordass.gi (1 hit)
+	Line 1297:   l:=LetterRepAssocWord(wu);
+  C:\gap4r8\lib\wordlett.gi (15 hits)
+	Line 47: InstallMethod(LetterRepAssocWord,"W letter rep",true,
+	Line 50: InstallMethod(LetterRepAssocWord,"B letter rep",true,
+	Line 53: InstallOtherMethod(LetterRepAssocWord,"letter rep,gens",
+	Line 65:     for i in LetterRepAssocWord(w) do
+	Line 73:   return LetterRepAssocWord(w);
+	Line 136:   elm:=LetterRepAssocWord(w);
+	Line 200:   w:= LetterRepAssocWord( w );
+	Line 201:   gen:= LetterRepAssocWord( gen );
+	Line 226:   for i in  LetterRepAssocWord(w) do
+	Line 305:   a:=LetterRepAssocWord(a);
+	Line 306:   b:=LetterRepAssocWord(b);
+	Line 614:   w := ShallowCopy(LetterRepAssocWord(w));
+	Line 643:   x:=LetterRepAssocWord(x);
+	Line 646:   gens1:= List( gens1, LetterRepAssocWord );
+	Line 656:     e:= List( gens2, i->LetterRepAssocWord(i)[1] );
+  C:\gap4r8\lib\wordrep.gi (4 hits)
+	Line 250:   word:= LetterRepAssocWord( elm );
+	Line 1220:       ext:=LetterRepAssocWord(obj);
+	Line 1287: InstallOtherMethod(LetterRepAssocWord,"syllable rep, generators",
+	Line 1315: InstallMethod(LetterRepAssocWord,"syllable rep",true,

@@ -1,0 +1,34 @@
+InstallMethod(EpimorphismFromFreeGroup, "(FR) for FR groups with preimage data",
+        [IsFRGroup and HasFRGroupPreImageData],
+        function(G)
+    local r, F, gens, imgs;
+    r := FRGroupPreImageData(G)(0);
+    F := FreeGroupOfFpGroup(r.F);
+    gens := GeneratorsOfGroup(F);
+    imgs := List(GeneratorsOfGroup(r.F),r.preimage);
+    return GroupHomomorphismByFunction(F,G,w->MappedWord(w,gens,imgs),false,g->UnderlyingElement(r.image(g)));
+end);
+
+
+InstallOtherMethod(LetterRepAssocWord,"letter rep,gens",
+true, #TODO: This should be IsElmsColls once the tietze code is fixed.
+  [IsLetterAssocWordRep,IsHomogeneousList],0,
+function(w,gens)
+local n,t,i,l;
+  t:=[];
+  n:=Length(gens);
+  for i in [1..n] do
+    t[GeneratorSyllable(gens[i],1)]:=i;
+  od;
+  if not IsRange(t) or t[1]<>1 or t[n]<>n then
+    l:=[];
+    for i in LetterRepAssocWord(w) do
+      if i<0 then Add(l,-t[-i]);
+             else Add(l,t[i]);
+      fi;
+    od;
+    MakeImmutable(l);
+    return l;
+  fi;
+  return LetterRepAssocWord(w);
+end);

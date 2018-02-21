@@ -1,0 +1,12 @@
+groupGenerator := function(p) local G,ft,i;
+	ft:= FromTheLeftCollector(7);
+	SetRelativeOrder(ft,1,2);
+	for i in [2..7] do SetRelativeOrder(ft,i,p); od;
+	for i in [2..4] do SetConjugate(ft, i, 1, [i+3,1]); od;
+	for i in [5..7] do SetConjugate(ft, i, 1, [i-3,1]); od;
+	SetCommutator(ft, 3,2, [4,1]);
+	SetCommutator(ft, 6,5, [7,1]);
+	UpdatePolycyclicCollector(ft);
+	G:= PcpGroupByCollector(ft);
+	return G;
+end;

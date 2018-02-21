@@ -1,0 +1,15 @@
+Preimages representative
+Igs
+g^A?
+
+
+
+
+
+version:
+	clean up code
+	input, output clean up
+	triangular matrix (order of mutiplication) DONE --> refer to gap reference page 634
+
+
+HeisenbergGroup

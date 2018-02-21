@@ -1,0 +1,9 @@
+#M  Coefficients( <B>, <v> )  . . . . . . coefficients w.r.t. canonical basis
+##
+InstallMethod( Coefficients,
+    "for canonical basis of full s. c. algebra",
+    IsCollsElms,
+    [ IsBasis and IsCanonicalBasisFullSCAlgebra, IsSCAlgebraObj ],
+    function( B, v )
+    return ExtRepOfObj( v );
+end );

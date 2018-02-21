@@ -1,0 +1,46 @@
+#############################################################################
+##
+#M  ExtRepOfObj(<wor> )
+##
+##  We cache the last three external representations. Thus we can use them
+##  also for syllable access.
+LETTER_WORD_EREP_CACHE:=[1,1,1]; # initialization with dummys
+LETTER_WORD_EREP_CACHEVAL:=[1,1,1]; # initialization with dummys
+LETTER_WORD_EREP_CACHEPOS:=1;
+
+BindGlobal("ERepLettWord",function(w)
+local  i,r,elm,len,g,h,e;
+  for i in [1..3] do
+    if IsIdenticalObj(LETTER_WORD_EREP_CACHE[i],w) then
+      return LETTER_WORD_EREP_CACHEVAL[i];
+    fi;
+  od;
+  r:=[];
+  elm:=LetterRepAssocWord(w);
+  len:= Length( elm );
+  if len=0 then
+    return r;
+  fi;
+  i:= 2;
+  g:=AbsInt(elm[1]);
+  e:=SignInt(elm[1]);
+  while i <= len do
+    h:=AbsInt(elm[i]);
+    if h=g then
+      e:=e+SignInt(elm[i]);
+    else
+      Add(r,g);
+      Add(r,e);
+      g:=h;
+      e:=SignInt(elm[i]);
+    fi;
+    i:=i+1;
+  od;
+  Add(r,g);
+  Add(r,e);
+
+  LETTER_WORD_EREP_CACHE[LETTER_WORD_EREP_CACHEPOS]:=w;
+  LETTER_WORD_EREP_CACHEVAL[LETTER_WORD_EREP_CACHEPOS]:=Immutable(r);
+  LETTER_WORD_EREP_CACHEPOS:=(LETTER_WORD_EREP_CACHEPOS mod 3)+1;
+  return r;
+end);

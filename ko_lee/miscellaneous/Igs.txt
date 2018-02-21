@@ -1,0 +1,238 @@
+#F Igs( <gens> )
+##
+InstallOtherMethod( Igs, [IsList],
+function( gens ) return AddToIgs( [], gens ); end );
+
+#############################################################################
+##
+#F Ngs( <igs> )  . . .  . . . . . . . . . . . . compute normed version of igs
+##
+InstallOtherMethod( Ngs, [IsList],
+function( igs ) return List( igs, x -> NormedPcpElement( x ) ); end );
+
+#############################################################################
+##
+#F Cgs( <igs> ) . . . . . .. . . . . . . . . compute canonical version of igs
+##
+InstallOtherMethod( Cgs, [IsList],
+function( igs )
+    local ind, can, i, e, j, l, d, r, s;
+
+    # first norm leading coefficients
+    can := List( igs, x -> NormedPcpElement( x ) );
+
+    # reduce entries in matrix
+    for i in [1..Length(can)] do
+        e := LeadingExponent( can[i] );
+        d := Depth( can[i] );
+        for j in [1..i-1] do
+            l := Exponents( can[j] )[d];
+            if l > 0 then
+                r := QuoInt( l, e );
+                can[j] := can[j] * can[i]^-r;
+            elif l < 0 then
+                r := QuoInt( -l, e );
+                s := RemInt( -l, e );
+                if s = 0 then
+                    can[j] := can[j] * can[i]^r;
+                else
+                    can[j] := can[j] * can[i]^(r+1);
+                fi;
+            fi;
+        od;
+    od;
+
+    # set flag `normed' and return
+    for i in [1..Length(can)] do can[i]!.normed := true; od;
+    return can;
+end );
+
+
+
+#F AddToIgs( <igs>, <gens> )
+##
+InstallGlobalFunction( AddToIgs, function( igs, gens )
+    local coll, rels, todo, n, ind, g, d, h, k, eg, eh, e, f, c, i, l;
+
+    if Length( gens ) = 0 then return igs; fi;
+
+    # get information
+    coll := Collector( gens[1] );
+    rels := RelativeOrders( coll );
+    n    := NumberOfGenerators( coll );
+
+    # create new list from igs
+    ind  := ListWithIdenticalEntries(n, false );
+    for g in igs do ind[Depth(g)] := g; od;
+
+    # set counter and add tail as far as possible
+    c := UpdateCounter( ind, gens, n+1 );
+
+    # create a to-do list and a pointer
+    todo := Set( Filtered( gens, x -> Depth( x ) < c ) );
+
+    # loop over to-do list until it is empty
+    while Length( todo ) > 0 and c > 1 do
+
+        g := Remove( todo );
+        d := Depth( g );
+        f := [];
+
+        # shift g into ind
+        while d < c do
+            h := ind[d];
+            if not IsBool( h ) then
+
+                # reduce g with h
+                eg := LeadingExponent( g );
+                eh := LeadingExponent( h );
+                e  := Gcdex( eg, eh );
+
+                # adjust ind[d] by gcd
+                ind[d] := (g^e.coeff1) * (h^e.coeff2);
+                if e.coeff1 <> 0 then Add( f, d ); fi;
+
+                # adjust g
+                g := (g^e.coeff3) * (h^e.coeff4);
+            else
+
+                # just add g into ind
+                ind[d] := g;
+                g := g^0;
+                Add( f, d );
+            fi;
+            d := Depth( g );
+            c := UpdateCounter( ind, todo, c );
+        od;
+
+        # now add powers and commutators
+        for d in f do
+            g := ind[d];
+            if d <= Length( rels ) and rels[d] > 0 and d < c then
+                k := g ^ RelativeOrderPcp( g );
+                if Depth(k) < c then  Add( todo, k ); fi;
+            fi;
+            for l in [1..n] do
+                if not IsBool( ind[l] ) and ( d < c  or l < c ) then
+                    k := Comm( g, ind[l] );
+                    if Depth(k) < c then  Add( todo, k ); fi;
+                fi;
+            od;
+        od;
+
+        # try sorting
+        Sort( todo );
+
+    od;
+
+    # return resulting list
+    return Filtered( ind, x -> not IsBool( x ) );
+end );
+
+
+
+
+
+## IgsParallel( <gens>, <pre> )
+##
+InstallGlobalFunction( IgsParallel, function( gens, pre )
+    return AddToIgsParallel( [], gens, [], pre );
+end );
+
+
+InstallGlobalFunction( AddToIgsParallel,
+function( pcs, gens, ppcs, pgens )
+    local coll, rels, n, id, todo, tododo, ind, indd, g, gg, d, h, hh, k,
+          eg, eh, e, changed, c, i, r, sub;
+
+    if Length( gens ) = 0 then return [pcs, ppcs]; fi;
+
+    # get information
+    coll := Collector( gens[1] );
+    rels := RelativeOrders( coll );
+    n    := NumberOfGenerators( coll );
+    id   := gens[1]^0;
+
+    # create new list from pcs/ppcs
+    ind  := List( [1..n], x -> false );
+    indd := List( [1..n], x -> false );
+    for i in [1..Length(pcs)] do
+        d := Depth( pcs[i] );
+        ind[d]  := pcs[i];
+        indd[d] := ppcs[i];
+    od;
+
+    # set counter
+    c := UpdateCounterPara( ind, n+1 );
+
+    # create a to-do list from gens/pgens
+    sub   := Filtered( [1..Length(gens)], x -> Depth(gens[x]) < c );
+    todo  := gens{sub};
+    tododo:= pgens{sub};
+
+    # loop over to-do list until it is empty
+    while Length( todo ) > 0 and c > 1 do
+        g  := Remove(todo);
+        gg := Remove(tododo);
+        d  := Depth( g );
+
+        # shift g into ind
+        changed := [];
+        while d < c do
+            h  := ind[d];
+            hh := indd[d];
+            if not IsBool( h ) then
+
+                # reduce g with h
+                eg := LeadingExponent( g );
+                eh := LeadingExponent( h );
+                e  := Gcdex( eg, eh );
+
+                # adjust ind[d] by gcd
+                ind[d]  := (g^e.coeff1) * (h^e.coeff2);
+                indd[d] := (gg^e.coeff1) * (hh^e.coeff2);
+                if e.coeff1 <> 0 then Add( changed, d ); fi;
+
+                # adjust g
+                g  := (g^e.coeff3) * (h^e.coeff4);
+                gg := (gg^e.coeff3) * (hh^e.coeff4);
+            else
+
+                # just add g into ind
+                ind[d]  := g;
+                indd[d] := gg;
+                g  := g^0;
+                gg := gg^0;
+                Add( changed, d );
+            fi;
+            c := UpdateCounterPara( ind, c );
+            d := Depth( g );
+        od;
+
+        for d in changed do
+            g := ind[d];
+            gg := indd[d];
+            if d <= Length( rels ) and rels[d] > 0 then
+                r := RelativeOrderPcp( g );
+                k := g ^ r;
+                if Depth(k) < c then
+                    Add( todo, k );
+                    Add( tododo, gg^r );
+                fi;
+            fi;
+            for i in [1..Length(ind)] do
+                if not IsBool( ind[i] ) then
+                    k := Comm( g, ind[i] );
+                    if Depth(k) < c then
+                        Add( todo, k );
+                        Add( tododo, Comm( gg, indd[i] ) );
+                    fi;
+                fi;
+            od;
+        od;
+    od;
+
+    # return resulting list
+    return [Filtered( ind, x -> not IsBool( x ) ),
+            Filtered( indd, x -> not IsBool( x ) ) ];
+end );

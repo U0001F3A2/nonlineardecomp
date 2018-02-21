@@ -1,0 +1,281 @@
+\documentclass[12pt]{report}
+
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{amsmath,amssymb}
+\usepackage{enumerate}
+\usepackage{wrapfig}
+\usepackage{graphicx, amsthm, amsmath, amssymb}
+\usepackage{subfig}
+\usepackage{url}
+\usepackage{setspace}
+
+\usepackage[left=1.5in, bottom=1in, right=1in, top=1in, paperwidth=8.5in, paperheight=11in]{geometry}
+
+\doublespacing
+
+\captionsetup{figurewithin=chapter,tablewithin=chapter}
+
+\numberwithin{equation}{chapter}
+
+\DeclareMathAlphabet{\mathscr}{OT1}{pzc}%
+                                 {m}{it}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
+
+\newtheorem*{condition1}{Condition 1}
+\newtheorem*{condition2}{Condition 2}
+
+\newtheorem*{theorem1}{Theorem \ref{theorem}}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cZ}{\mathcal{Z}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cK}{\mathcal{K}}
+
+\newcommand{\threeplus}{$3^+$-cluster}
+\newcommand{\fourplus}{$4^+$-cluster}
+\newcommand{\threepluss}{$3^+$-cluster }
+\newcommand{\fourpluss}{$4^+$-cluster }
+
+\newcommand{\openthree}{\mathcal{K}_3^o}
+\newcommand{\poorone}{D_1^p}
+
+\newcommand{\set}[1]{\left \{ #1 \right \}}
+
+%\def\qed{\hfill $\blacksquare$ \bigskip}
+
+
+
+
+\begin{document}
+
+%\large
+
+\title{\huge Title Here}
+\author{\Large Name Here}
+\date{}
+\maketitle
+
+
+
+
+
+\chapter*{Abstract}
+
+
+For a graph, $G$, and a vertex $v \in V(G)$, let $N[v]$ be the set of vertices adjacent to and including $v$.  A set $D \subseteq V(G)$ is a vertex identifying code if for any two distinct vertices $v_1, v_2 \in V(G)$, the vertex sets $N[v_1] \cap D$ and $N[v_2] \cap D$ are distinct and non-empty.  We consider the minimum density of a vertex identifying code for the infinite hexagonal grid.  In 2000, Cohen et al. constructed two codes with a density of $\frac{3}{7} \approx 0.428571$, and this remains the best known upper bound.  Until now, the best known lower bound was $\frac{12}{29} \approx 0.413793$ and was proved by Cranston and Yu in 2009.  We present three new codes with a density of $\frac{3}{7}$, and we improve the lower bound to $\frac{5}{12} \approx 0.416667$.
+
+
+
+\chapter*{Acknowledgment}
+
+First and foremost, I must acknowledge my advisor and co-researcher, Professor Gexin Yu.  I would also like to thank CSUMS for supporting this research.  Finally, I would like to thank Chase Albert, Professor David Phillips and Jeff Soosiah for their help in constructing the codes of density $3/7$ shown in Chapter \ref{upperbound}.  I would especially like to express my gratitude to Jeff for his support during the early stages of this project.
+
+
+\tableofcontents
+
+\listoffigures
+
+
+
+\chapter{Introduction}
+
+
+
+The study of vertex identifying codes is motivated by the desire to detect failures efficiently in a multi-processor network.  Such a network can be modeled as a simple undirected graph, $G$, where $V(G)$ represents the set of processors and $E(G)$ represents the set of connections among processors.  Suppose we place detectors on a subset of these processors.  These detectors monitor all processors within a neighborhood of radius $r$ and send a signal to a central controller when a failure occurs.  We assume that no two failures occur simultaneously.  A signal from a detector, $d$, indicates that a processor in the $r$-neighborhood of $d$ has failed but provides no further information.  Now, any given processor, $p$, might be in the $r$-neighborhood of several detectors, $d_1$, $d_2$, $d_3$...  Then, when $p$ fails, the central controller receives signals from $d_1$, $d_2$, $d_3$...  Let us call $\{d_1, d_2, d_3, ... \}$ the trace of $p$ in $G$.  If each processor has a unique and non-empty trace, then the central controller can determine which processor failed simply by noting the detectors from which signals were received.  In this case, we call the subset of processors on which detectors were placed an identifying code.
+
+Vertex identifying codes were first introduced in 1998 by Karpovsky, Chakrabarty and Levitin \cite{karpovsky}.  The processors of the preceding paragraph become the vertices of a graph, and the processors on which detectors have been placed become the vertex subset called a vertex identifying code.  In the example above, we considered detectors which monitor a neighborhood of radius $r$.  In this paper, we concern ourselves with the case in which $r=1$.  
+
+Let $N_i(v)$ be the set of vertices at distance-$i$ from a vertex, $v$, and let $N[v] = N_1(v) \cup \{v\}$.
+
+\bigskip
+
+\begin{definition}
+\label{VIC def}
+
+For a graph, $G$, a set $D \subseteq V(G)$ is a {\bf vertex identifying code} if
+
+\begin{itemize}
+
+\item[(i)] for all $v \in V(G)$, we have $N[v] \cap D \not = \emptyset$
+
+\item[(ii)] for all $v_1,v_2 \in V(G)$ with $v_1 \not = v_2$, we have $N[v_1] \cap D \not = N[v_2] \cap D$
+
+\end{itemize}
+
+\end{definition}
+
+\bigskip
+
+From Definition \ref{VIC def}, we see that some graphs do not admit vertex identifying codes.  In particular, if $N[v_1] = N[v_2]$ for some distinct $v_1, v_2 \in V(G)$ then $G$ does not admit a vertex identifying code because $N[v_1] \cap D = N[v_2] \cap D$ for any $D \subseteq V(G)$.  On the other hand, if $N[v_1] \not = N[v_2]$ for all distinct $v_1, v_2 \in V(G)$ then $G$ admits a vertex identifying code because $V(G)$ is such a code.
+
+%We can prove the forward implication by contrapositive.  If $G$ contains two vertices, $v_1$ and $v_2$, such that $N[v_1] = N[v_2]$, then $N[v_1] \cap D = N[v_2] \cap D$ for all $D \subseteq V(G)$; therefore, $G$ does not admit a vertex identifying code.  To prove the reverse implication we note that if $N[v_1] \not = N[v_2]$ for all distinct $v_1, v_2 \in V(G)$, then $V(G)$ is a vertex identifying code for $G$; therefore, $G$ admits a vertex identifying code.
+
+Of particular interest are vertex identifying codes of minimal cardinality.  When dealing with infinite graphs, we consider instead the \emph{density} of a vertex identifying code, i.e., the ratio of the number of vertices in the code to the total number of vertices.  Let $G$ be an infinite graph, and let $D \subseteq V(G)$ be a vertex identifying code for $G$.  Then, for some $v \in V(G)$, the set of vertices in $D$ within distance-$k$ of $v$ is given by $\bigcup_{i=0}^{k} N_i(v) \cap D$.  Let $\sigma(D,G)$ be the density of $D$ in $G$.  Then,
+\begin{equation}
+\label{density eq}
+\sigma(D,G) = \displaystyle\limsup_{k \to \infty} \frac{ \left | \bigcup_{i=0}^{k} N_i(v) \cap D \right | }{ \left | \bigcup_{i=0}^{k} N_i(v) \right | }
+\end{equation}
+%Notice that we use the limit superior.  This seems to imply that the density is not always convergent.  Indeed, in Appendix \ref{divergent} we provide an example of a divergent density for an infinite graph.  
+Let $\sigma_0(G)$ be the minimum density of a vertex identifying code for $G$; that is,
+\begin{equation}
+\sigma_0(G) = \min_D\{ \sigma(D,G) \}
+\end{equation}
+
+
+
+Karpovsky et al. \cite{karpovsky} considered the minimum density of vertex identifying codes for the infinite triangular ($G_T$), square ($G_S$) and hexagonal ($G_H$) grids.  They showed $\sigma_0(G_T) = 1/4$.  In 1999, Cohen et al. \cite{cohen1999} proved $\sigma_0(G_S) \leq 7/20$, and, in 2005, Ben-Haim and Litsyn \cite{benhaim} completed the proof by showing $\sigma_0(G_S) \geq 7/20$.  
+
+
+
+We concern ourselves in this paper with $\sigma_0(G_H)$.  In 1998, Karpovsky et al. \cite{karpovsky} showed $\sigma_0(G_H) \geq 2/5 = 0.4$.  In 2000, Cohen et al. \cite{cohen2000} improved this result to $\sigma_0(G_H) \geq 16/39 \approx 0.410256$ and constructed two codes with a density of $3/7 \approx 0.428571$ (included in Chapter \ref{upperbound}) implying $\sigma_0(G_H) \leq 3/7$.  In 2009, Cranston and Yu \cite{12/29} proved $\sigma_0(G_H) \geq 12/29 \approx 0.413793$.   For other results on identifying codes for the hexagonal grid, see \cite{martin, stanton}. 
+
+
+In this paper, we present three new codes with a density of $ 3/7$ and prove $\sigma_0(G_H) \geq 5/12 \approx 0.416667$.  In conclusion, it is now known that $5/12 \leq \sigma_0(G_H) \leq 3/7$.
+
+% Recall from above that our paper is concerned with the case $r=1$.  We should mention, however, that work has been done on $r$-identifying codes for $G_H$ for $r \geq 2$.  In 2010, Martin and Stanton \cite{martin} proved the minimum density of a $2$-identifying code for $G_H$ is at least $1/5$.  Also in 2010, Stanton \cite{stanton} proved upper bounds for the minimum density of $r$-identifying codes for $G_H$ for arbitrary $r$. 
+
+
+
+Suppose $\beta$ is an upper bound on $\sigma_0(G_H)$.  To prove this, we need only show the existence of a code, $D$, with $\sigma(D,G_H) \leq \beta$.  When constructing such codes, we usually look for tiling patterns.  Since the pattern repeats ad infinitum, the density of one tile is the density of the whole graph.  Examples are included in Chapter \ref{upperbound}.%Figure \ref{3codes} shows three new codes for the infinite hexagonal grid with a density of $3/7$.
+
+\bigskip
+
+\begin{theorem}
+\label{theorem}
+The minimum density of a vertex identifying code for the infinite hexagonal grid is greater than or equal to $5/12$.
+\end{theorem}
+
+\bigskip
+
+To prove Theorem \ref{theorem}, we employ the discharging method.  Let $D$ be an arbitrary vertex identifying code for $G_H$.  We assign 1 ``charge" to each vertex in $D$ which we then redistribute so that every vertex in $G_H$ retains at least $5/12$ charge.  The charge is redistributed in accordance with a set of ``Discharging Rules".  Since $D$ was chosen arbitrarily, we then conclude that $5/12$ is a lower bound on $\sigma_0(G_H)$.
+
+Our results regarding the upper bound are presented in Chapter \ref{upperbound}.  The rest of the paper is devoted to the proof of Theorem \ref{theorem}.  As the proof is rather lengthy, we include a sketch in Chapter \ref{sketch}.  In Chapter \ref{general}, we introduce several properties of vertex identifying codes for $G_H$ which we will reference throughout the paper.  Chapter \ref{terminology} is devoted to terminology and notations; the vast majority of relevant notions are defined here.  In Chapter \ref{lemmas}, we state and prove several lemmas concerning the structure of vertex identifying codes for $G_H$.  The main result of this paper, Theorem \ref{theorem}, is proved in Chapter \ref{mainresult}.  
+
+For the rest of the paper, if not explicitly stated, $D$ is to be interpreted as a vertex identifying code for the infinite hexagonal grid.
+
+
+
+
+We introduce the following convention which we will use throughout the paper.  Let $G$ be a graph, and suppose $D \subseteq V(G)$ is a vertex identifying code for $G$.  We use a solid vertex to denote that a vertex is in $D$, and we use a hollow vertex to denote that a vertex is not in $D$.  The status of all other vertices is undetermined.  In Figure \ref{VICconvention}, for instance, $u \in D$ and $v \not \in D$, while the status of $w$ is undetermined.
+
+%Then, $u,v,w \in V(G)$.  Let $D \subseteq G$ be a vertex identifying code for $G$.  Then, $u \in D$ and $v \not \in D$, while the status of $w$ is undetermined.
+
+
+
+
+
+
+\chapter{Upper Bound}
+
+
+\chapter{Sketch of the Proof}
+\label{sketch}
+
+\section{Discharging Examples}
+
+
+
+
+\chapter{General Structural Properties}
+\label{general}
+
+
+
+
+
+\chapter{Terminology and Notations}
+
+
+\section{Non-Poor 1-Clusters}
+
+
+
+
+\section{3$^+$-Clusters}
+
+
+
+
+\section{Very Poor 1-Clusters}
+
+
+
+\section{Paired 3-Clusters}
+
+
+
+
+
+
+
+
+
+\chapter{Proof of Theorem} \label{MainResult}
+
+
+
+
+\section{1-Clusters}
+
+
+
+
+\section{3-Clusters}
+
+
+
+\section{4$^+$-Clusters}
+
+
+
+\chapter{Future Research}
+
+
+
+\section{Upper Bound}
+
+
+
+
+\section{Lower Bound}
+
+
+
+\appendix
+\chapter{Graph Theory Basics}
+\label{graphtheory}
+
+
+  
+
+
+
+
+
+\clearpage
+\addcontentsline{toc}{chapter}{Bibliography}
+\begin{thebibliography}{9}
+
+\bibitem{benhaim}
+Y. Ben-Haim, S. Litsyn, Exact minimum density of codes identifying vertices in the square grid,
+\emph{SIAM J. Discrete Math.}, 
+{\bf 19} (2005), no. 1, 69-82.
+
+
+
+\end{thebibliography}
+
+
+\end{document}
