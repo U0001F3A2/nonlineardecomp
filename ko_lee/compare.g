@@ -8,19 +8,24 @@ Read(Concatenation(DirectoryAnalysis, "miscellaneous/grouptester.g"));
 
 Read(Concatenation(DirectoryAnalysis, "adversary/nonlinear_decomposition.g"));
 
+Read(Concatenation(DirectoryAnalysis, "adversary/nonlinear_decomposition_preimage.g"));
+
 Read(Concatenation(DirectoryAnalysis, "Alice and Bob/find_key_authentic.g"));
 
 trials := 100;
 protocol := function(primes,G,A,B) local 
 AdversaryResultList,AliceResultList,BobResultList, p, i, j, k, G, g, A, B, a, gm, b, gn, startTime1, authentic1, TimeSpent1,
 startTime2, authentic2, TimeSpent2, startTime3, pirated, TimeSpent3,AliceSum, BobSum, AdversarySum,AliceAverage, BobAverage, AdversaryAverage,
-AliceResultLists, BobResultLists, AdversaryResultLists,AverageList,resultList;
+AliceResultLists, BobResultLists, AdversaryResultLists,AverageList,resultList
+startTime4, TimeSpent4, pirated2;
 
 	for p in primes do
 	
 		Print("prime: ", p);Print("\n");
-		AdversaryResultList := [];
-		AliceResultList:= [];
+		AdversaryResultList1 := [];
+		AdversaryResultList2 := [];
+		AliceResultList := [];
+		
 		BobResultList := [];
 		Print("start time: ", Runtime());Print("\n");
 		
@@ -66,9 +71,18 @@ AliceResultLists, BobResultLists, AdversaryResultLists,AverageList,resultList;
 			startTime3 := Runtime();
 			pirated := nonlinear_decomposition(G,A,B,gm,gn,g);
 			TimeSpent3 := Runtime() - startTime3;
-			Add(AdversaryResultList, TimeSpent3);
+			Add(AdversaryResultList1, TimeSpent3);
 			
 			if not (authentic1 = pirated) then
+				Print("FAIL! adversary got the wrong key\n");
+			fi;
+			
+			startTime4 := Runtime();
+			pirated2 := nonlinear_decomposition_preimage(G,A,B,gm,gn,g);
+			TimeSpent4 = Runtime() - startTime4;
+			Add(AdversaryResultList2, TimeSpent4);
+			
+			if not (authentic1 = pirated2) then
 				Print("FAIL! adversary got the wrong key\n");
 			fi;
 			
@@ -77,9 +91,10 @@ AliceResultLists, BobResultLists, AdversaryResultLists,AverageList,resultList;
 			
 			AliceAverage := Average(AliceResultList);
 			BobAverage := Average(BobResultList);
-			AdversaryAverage := Average(AdversaryResultList);
+			AdversaryAverage1 := Average(AdversaryResultList1);
+			AdversaryAverage2 := Average(AdversaryResultList2);
 			
-			AverageList := [AliceAverage,BobAverage,AdversaryAverage];
+			AverageList := [AliceAverage,BobAverage,AdversaryAverage1,AdversaryAverage2];
 			resultList := [AliceResultList,BobResultList,AdversaryResultList,AverageList];
 			PrintTo(Concatenation(DirectoryAnalysis,"compare_test_results/",String(p),".txt"), resultList);
 			
