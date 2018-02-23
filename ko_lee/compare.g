@@ -14,9 +14,9 @@ Read(Concatenation(DirectoryAnalysis, "Alice and Bob/find_key_authentic.g"));
 
 trials := 100;
 protocol := function(primes,G,A,B) local 
-AdversaryResultList,AliceResultList,BobResultList, p, i, j, k, G, g, A, B, a, gm, b, gn, startTime1, authentic1, TimeSpent1,
-startTime2, authentic2, TimeSpent2, startTime3, pirated, TimeSpent3,AliceSum, BobSum, AdversarySum,AliceAverage, BobAverage, AdversaryAverage,
-AliceResultLists, BobResultLists, AdversaryResultLists,AverageList,resultList
+AdversaryResultList1,AdversaryResultList2 ,AliceResultList,BobResultList, p, i, j, k, g, a, gm, b, gn, startTime1, authentic1, TimeSpent1,
+startTime2, authentic2, TimeSpent2, startTime3, pirated, TimeSpent3,AliceSum, BobSum, AdversarySum,AliceAverage, BobAverage, AdversaryAverage1, AdversaryAverage2,
+AliceResultLists, BobResultLists, AdversaryResultLists,AverageList,resultList,
 startTime4, TimeSpent4, pirated2;
 
 	for p in primes do
@@ -79,7 +79,7 @@ startTime4, TimeSpent4, pirated2;
 			
 			startTime4 := Runtime();
 			pirated2 := nonlinear_decomposition_preimage(G,A,B,gm,gn,g);
-			TimeSpent4 = Runtime() - startTime4;
+			TimeSpent4 := Runtime() - startTime4;
 			Add(AdversaryResultList2, TimeSpent4);
 			
 			if not (authentic1 = pirated2) then
@@ -95,7 +95,7 @@ startTime4, TimeSpent4, pirated2;
 			AdversaryAverage2 := Average(AdversaryResultList2);
 			
 			AverageList := [AliceAverage,BobAverage,AdversaryAverage1,AdversaryAverage2];
-			resultList := [AliceResultList,BobResultList,AdversaryResultList,AverageList];
+			resultList := [AliceResultList,BobResultList,AdversaryResultList1,AdversaryResultList2,AverageList];
 			PrintTo(Concatenation(DirectoryAnalysis,"compare_test_results/",String(p),".txt"), resultList);
 			
 		od;
@@ -105,16 +105,29 @@ startTime4, TimeSpent4, pirated2;
 		Print("\n");
 		Print(BobAverage);
 		Print("\n");
-		Print(AdversaryAverage);
+		Print(AdversaryAverage1);
+		Print("\n");
+		Print(AdversaryAverage2);
 		Print("\n");
 		
 	od;
 end;
+
+l27 := AllSmallGroups(27);
+filt27:= Filtered(l27, i -> not IsAbelian(i));
+B:= StandardWreathProduct(filt27[1], Group((1,2,3)));
+iso:= IsomorphismPcGroup(B);
+G:= Image(iso);
+isom:= IsomorphismPcpGroup(G);
+G:= Image(isom);
+
 for i in Filtered([1..20], x-> IsPrime(x)) do
-	Gs := Filtered(AllGroups(i^5), x-> Length(grouptest(x))>3);
+	# Gs := Filtered(AllGroups(i^5), x-> Length(grouptest(x))>3);
+	Gs := [G];
 	for G in Gs do
-		A := Group(Flat(grouptest(G)[1],grouptest(G)[2]));
-		B := Group(Flat(grouptest(G)[3],grouptest(G)[4]));
+		tested := grouptest(G);
+		A := Group(Flat([tested[1],tested[2]]));
+		B := Group(Flat([tested[3],tested[4]]));
 		protocol([3],G,A,B);
 	od;
 od;

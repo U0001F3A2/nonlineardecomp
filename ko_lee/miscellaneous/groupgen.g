@@ -1,4 +1,4 @@
-l27 := AllSmallGroups(27);
+l27 := AllSmallGroups(125);
 filt27:= Filtered(l27, i -> not IsAbelian(i));
 B:= StandardWreathProduct(filt27[1], Group((1,2,3)));
 iso:= IsomorphismPcGroup(B);
