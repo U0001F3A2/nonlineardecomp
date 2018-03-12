@@ -1,6 +1,6 @@
-DirectoryAnalysis := "C:/Users/Yoongbok Lee/Dropbox/Nonabelian cryptography/ko_lee/";
+DirectoryAnalysis := "C:/Users/Yoongbok Lee/Dropbox/Nonabelian cryptography/semi_prod/";
 
-# DirectoryAnalysis := "./Dropbox/NonabelianCryptography/ko_lee/";
+# DirectoryAnalysis := "./Dropbox/NonabelianCryptography/semi_prod/";
 
 Read(Concatenation(DirectoryAnalysis, "groupGenerator.g"));
 
@@ -39,16 +39,23 @@ startTime4, TimeSpent4, pirated2;
 		
 		for i in [1..trials] do
 			
+			newMap := Random(G);
 			g := Random(G);
-			while (g in A) or (g in B) do
-				g := Random(G);
-			od;
+			gens := GeneratorsOfGroup(G);
+			imgs := newMap^-1*gens*newMap;
+			phi := GroupHomomorphismByImages( G, G, gens, imgs );
 			
-			a := Random(A);
-			gm := a^-1*g*a;
+			int := [1..10000]
+			a := Random(int);
+			for i in [1..a] do
+				gm := phi(g);
+			od;
 
-			b := Random(B);
-			gn := b^-1*g*b;
+			int := [1..10000]
+			b := Random(int);
+			for i in [1..b] do
+				gn := phi(g);
+			od;
 			
 			startTime1 := Runtime();
 			authentic1 := find_key_authentic(g,a,gn);
@@ -123,8 +130,7 @@ G:= Image(isom);
 
 for i in Filtered([1..30], x-> IsPrime(x)) do
 	G := groupGenerator(i);
-	A := Group(G.2,G.3,G.4);
-	B := Group(G.5,G.6,G.7);
+	
 	# Gs := Filtered(AllGroups(i^5), x-> Length(grouptest(x))>3);
 	Gs := [G];
 	for G in Gs do

@@ -1,6 +1,6 @@
-# DirectoryAnalysis := "./Dropbox/NonabelianCryptography/nonlinear_decomp_in_GAP/";
+# DirectoryAnalysis := "./Dropbox/NonabelianCryptography/semi_prod/";
 
-DirectoryAnalysis := "C:/Users/mstou/Dropbox/Nonabelian cryptography/semi_prod/";
+DirectoryAnalysis := "C:/Users/Yoongbok Lee/Dropbox/Nonabelian cryptography/semi_prod/";
 
 Read(Concatenation(DirectoryAnalysis, "groupGenerator.g"));
 
@@ -9,7 +9,7 @@ Read(Concatenation(DirectoryAnalysis, "adversary/nonlinear_decomposition.g"));
 Read(Concatenation(DirectoryAnalysis, "Alice and Bob/find_key_authentic.g"));
 
 trials := 100;
-protocol := function(primes,filename) local 
+protocol := function(primes) local
 AdversaryResultList,AliceResultList,BobResultList, p, i, j, k, G, g, A, B, a, gm, b, gn, startTime1, authentic1, TimeSpent1,
 startTime2, authentic2, TimeSpent2, startTime3, pirated, TimeSpent3,AliceSum, BobSum, AdversarySum,AliceAverage, BobAverage, AdversaryAverage,
 AliceResultLists, BobResultLists, AdversaryResultLists, resultLists;
@@ -30,15 +30,23 @@ AliceResultLists, BobResultLists, AdversaryResultLists, resultLists;
 		for i in [1..trials] do
 		
 			G := groupGenerator(p);
+			newMap := Random(G);
 			g := Random(G);
-			A := Group(G.2,G.3,G.4);
-			B := Group(G.5,G.6,G.7);
+			gens := GeneratorsOfGroup(G);
+			imgs := newMap^-1*gens*newMap;
+			phi := GroupHomomorphismByImages( G, G, gens, imgs );
 			
-			a := Random(A);
-			gm := a^-1*g*a;
+			int := [1..10000]
+			a := Random(int);
+			for i in [1..a] do
+				gm := phi(g);
+			od;
 
-			b := Random(B);
-			gn := b^-1*g*b;
+			int := [1..10000]
+			b := Random(int);
+			for i in [1..b] do
+				gn := phi(g);
+			od;
 			
 
 			#Print("gm\n");
@@ -112,4 +120,4 @@ AliceResultLists, BobResultLists, AdversaryResultLists, resultLists;
 	# PrintTo(Concatenation(DirectoryAnalysis,filename),resultLists);
 end;
 
-protocol([7,11,13,17,23,27],"7_11_13_17_23_27.g");
+protocol([7,11,13,17,23,27]);
