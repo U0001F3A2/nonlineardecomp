@@ -1,6 +1,6 @@
-DirectoryAnalysis := "C:/Users/Yoongbok Lee/Dropbox/Nonabelian cryptography/ko_lee/";
+#DirectoryAnalysis := "C:/Users/Yoongbok Lee/Dropbox/Nonabelian cryptography/ko_lee/";
 
-# DirectoryAnalysis := "./Dropbox/NonabelianCryptography/ko_lee/";
+DirectoryAnalysis := "./Dropbox/NonabelianCryptography/ko_lee/";
 
 Read(Concatenation(DirectoryAnalysis, "groupGenerator.g"));
 
@@ -121,7 +121,7 @@ G:= Image(iso);
 isom:= IsomorphismPcpGroup(G);
 G:= Image(isom);
 
-for i in Filtered([1..30], x-> IsPrime(x)) do
+for i in Filtered([37..50], x-> IsPrime(x)) do
 	G := groupGenerator(i);
 	A := Group(G.2,G.3,G.4);
 	B := Group(G.5,G.6,G.7);
